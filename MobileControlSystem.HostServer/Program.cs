@@ -1,4 +1,5 @@
-﻿using Nancy.Hosting.Self;
+﻿using MobileControlSystem.Core.Socket;
+using Nancy.Hosting.Self;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,13 +13,16 @@ namespace MobileControlSystem.HostServer
     {
         static void Main(string[] args)
         {
-            //启动 后台管理站点
+            //启动中控系统站点
             var webmanager = ConfigurationManager.AppSettings["WebManager"];
             var Host = new NancyHost(new Uri(webmanager));
 
             Host.Start();
-            Console.WriteLine("管理系统已启动..." + webmanager);
+            Console.WriteLine("中控系统已启动..." + webmanager);
 
+
+            //启动Socket
+            SocketBootStrap.Start();
 
             Console.Read();
         }
